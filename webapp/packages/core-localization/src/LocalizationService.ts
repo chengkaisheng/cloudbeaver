@@ -17,6 +17,7 @@ import { SettingsService } from '@cloudbeaver/core-settings';
 import { ILocaleProvider } from './IlocaleProvider';
 import { defaultENLocale } from './locales/en';
 import { defaultRULocale } from './locales/ru';
+import { defaultZHLocale} from './locales/zh';
 import { TLocalizationToken } from './TLocalizationToken';
 
 export type ServerLanguageShort = Pick<ServerLanguage, 'isoCode' | 'nativeName'>;
@@ -91,7 +92,7 @@ export class LocalizationService extends Bootstrap {
     if (key === this.settings.language) {
       return;
     }
-    const response = await this.graphQLService.gql.changeSessionLanguage({ locale: key });
+    const response = await this.graphQLService.gql.changeSessionLanguage({ locale: key });//服务端是否已成功更改设置
     this.setLocale(key);
     if (response.changeSessionLanguage) {
       window.location.reload();
@@ -102,6 +103,8 @@ export class LocalizationService extends Bootstrap {
     switch (locale) {
       case 'ru':
         return defaultRULocale;
+      case 'zh':
+        return defaultZHLocale;
       default:
         return defaultENLocale;
     }
@@ -114,11 +117,11 @@ export class LocalizationService extends Bootstrap {
 
   private async setLocale(key: string) {
     const config = await this.serverService.config.load(null);
-
+    console.log(config);
     if (!config) {
       throw new Error('Cant\'t get server settings');
     }
-
+    //判断是否支持当前设置的语言
     if (!config.supportedLanguages.some(lang => lang.isoCode === key)) {
       this.setCurrentLocale(config!.supportedLanguages[0]!.isoCode);
       throw new Error(`Language '${key}' is not supported`);
@@ -132,13 +135,13 @@ export class LocalizationService extends Bootstrap {
     }
     try {
       const locale = new Map<string, string>();
-
       for (const provider of this.localeProviders) {
         for (const [key, value] of await provider(localeKey)) {
           locale.set(key, value);
         }
       }
       this.localeMap.set(localeKey, locale);
+      
     } catch (error) {
       this.notificationService.logException(error, 'Locale is not found', true);
     }
