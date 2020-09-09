@@ -1,0 +1,20 @@
+export default [
+    ['connections_administration_item', '连接管理'],
+    ['connections_administration_new_connection', '新连接'],
+    ['connections_administration_configuration_wizard_step_title', '数据库连接'],
+    ['connections_administration_configuration_wizard_step_description', '数据库连接'],
+    ['connections_connection_edit_authentication', '认证方式'],
+    ['connections_connection_edit_access', '访问'],
+    ['connections_connection_edit_access_load_failed', '连接访问加载失败'],
+    ['connections_connection_edit_access_role', '角色'],
+    ['connections_connection_edit_search', '搜索'],
+    ['connections_connection_edit_search_hosts', '主机名'],
+    ['connections_connection_address', '地址'],
+    ['connections_connection_name', '名称'],
+    ['connections_connection_description', '描述'],
+    ['connections_connection_driver', 'Driver'],
+    ['connections_connection_host', '主机'],
+    ['connections_connection_port', '端口'],
+    ['connections_connection_template', '模版'],
+  ];
+  

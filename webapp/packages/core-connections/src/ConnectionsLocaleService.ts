@@ -25,6 +25,8 @@ export class ConnectionsLocaleService extends Bootstrap {
     switch (locale) {
       case 'ru':
         return (await import('./locales/ru')).default;
+      case 'zh':
+        return (await import('./locales/zh')).default;
       default:
         return (await import('./locales/en')).default;
     }
