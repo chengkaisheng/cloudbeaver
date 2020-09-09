@@ -22,7 +22,7 @@ import { TLocalizationToken } from './TLocalizationToken';
 
 export type ServerLanguageShort = Pick<ServerLanguage, 'isoCode' | 'nativeName'>;
 
-const DEFAULT_LOCALE_NAME = 'en';
+const DEFAULT_LOCALE_NAME = 'zh';
 const LANG_SETTINGS_KEY = 'langSettings';
 
 @injectable()
@@ -106,7 +106,7 @@ export class LocalizationService extends Bootstrap {
       case 'zh':
         return defaultZHLocale;
       default:
-        return defaultENLocale;
+        return defaultZHLocale;
     }
   }
 
